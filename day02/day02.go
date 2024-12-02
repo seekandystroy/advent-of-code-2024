@@ -15,7 +15,7 @@ func Part1() {
 		fmt.Println("Error:", err)
 	}
 
-	var safeReportsCount = 0
+	safeReportsCount := 0
 	for i := 0; i < len(reportsList); i++ {
 		if isReportSafe(reportsList[i]) {
 			safeReportsCount += 1
@@ -61,7 +61,7 @@ func getListOfReports(fileName string) ([][]int, error) {
 
 	scanner := bufio.NewScanner(file)
 
-	var reportsList = [][]int{}
+	reportsList := [][]int{}
 	for scanner.Scan() {
 		line := scanner.Text()
 
@@ -79,7 +79,7 @@ func getListOfReports(fileName string) ([][]int, error) {
 func lineToNumbersList(line string) ([]int, error) {
 	split := strings.Fields(line)
 
-	var numbers = []int{}
+	numbers := []int{}
 
 	for i := 0; i < len(split); i++ {
 		number, err := strconv.Atoi(split[i])
@@ -100,10 +100,8 @@ func isReportSafe(report []int) bool {
 	}
 
 	for i := 1; i < len(report)-1; i++ {
-		var (
-			curr = report[i]
-			next = report[i+1]
-		)
+		curr := report[i]
+		next := report[i+1]
 
 		diff := curr - next
 

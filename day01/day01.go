@@ -15,7 +15,7 @@ func Part1() {
 		fmt.Println("Error:", err)
 	}
 
-	var totalDistance = 0
+	totalDistance := 0
 
 	for i := 0; i < len(leftList); i++ {
 		totalDistance += abs(leftList[i] - rightList[i])
@@ -43,7 +43,7 @@ func Part2() {
 		}
 	}
 
-	var similarityScore = 0
+	similarityScore := 0
 
 	for i := 0; i < len(leftList); i++ {
 		leftValue := leftList[i]
@@ -58,10 +58,8 @@ func Part2() {
 }
 
 func getListsFromFile(fileName string) ([]int, []int, error) {
-	var (
-		leftList  = []int{}
-		rightList = []int{}
-	)
+	leftList := []int{}
+	rightList := []int{}
 
 	file, err := os.Open(fileName)
 	if err != nil {
