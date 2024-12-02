@@ -1,6 +1,7 @@
 package day02
 
 import (
+	"advent-of-code-2024/utils"
 	"bufio"
 	"fmt"
 	"os"
@@ -95,7 +96,7 @@ func lineToNumbersList(line string) ([]int, error) {
 func isReportSafe(report []int) bool {
 	previousDiff := report[0] - report[1]
 
-	if previousDiff == 0 || abs(previousDiff) > 3 {
+	if previousDiff == 0 || utils.Abs(previousDiff) > 3 {
 		return false
 	}
 
@@ -107,19 +108,11 @@ func isReportSafe(report []int) bool {
 
 		if diff == 0 ||
 			((diff < 0) != (previousDiff < 0)) ||
-			abs(diff) > 3 {
+			utils.Abs(diff) > 3 {
 			return false
 		}
 
 		previousDiff = diff
 	}
 	return true
-}
-
-func abs(x int) int {
-	if x < 0 {
-		return -x
-	} else {
-		return x
-	}
 }

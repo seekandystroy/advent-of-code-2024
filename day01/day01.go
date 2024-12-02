@@ -1,6 +1,7 @@
 package day01
 
 import (
+	"advent-of-code-2024/utils"
 	"bufio"
 	"fmt"
 	"os"
@@ -18,7 +19,7 @@ func Part1() {
 	totalDistance := 0
 
 	for i := 0; i < len(leftList); i++ {
-		totalDistance += abs(leftList[i] - rightList[i])
+		totalDistance += utils.Abs(leftList[i] - rightList[i])
 	}
 
 	fmt.Println(totalDistance)
@@ -95,12 +96,4 @@ func getListsFromFile(fileName string) ([]int, []int, error) {
 	slices.Sort(rightList)
 
 	return leftList, rightList, nil
-}
-
-func abs(x int) int {
-	if x < 0 {
-		return -x
-	} else {
-		return x
-	}
 }
