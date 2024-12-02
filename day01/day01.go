@@ -10,45 +10,10 @@ import (
 )
 
 func Part1() {
-	file, err := os.Open("day01/input.txt")
+	leftList, rightList, err := getListsFromFile("day01/input.txt")
 	if err != nil {
 		fmt.Println("Error:", err)
-		return
 	}
-	defer file.Close()
-
-	scanner := bufio.NewScanner(file)
-	var (
-		leftList  = []int{}
-		rightList = []int{}
-	)
-
-	for scanner.Scan() {
-		line := scanner.Text()
-
-		split := strings.Fields(line)
-		first, err := strconv.Atoi(split[0])
-		if err != nil {
-			fmt.Println("Error:", err)
-			return
-		}
-
-		second, err := strconv.Atoi(split[1])
-		if err != nil {
-			fmt.Println("Error:", err)
-			return
-		}
-
-		leftList = append(leftList, first)
-		rightList = append(rightList, second)
-	}
-
-	if err := scanner.Err(); err != nil {
-		fmt.Println("Error:", err)
-	}
-
-	slices.Sort(leftList)
-	slices.Sort(rightList)
 
 	var totalDistance = 0
 
@@ -57,6 +22,48 @@ func Part1() {
 	}
 
 	fmt.Println(totalDistance)
+}
+
+func getListsFromFile(fileName string) ([]int, []int, error) {
+	var (
+		leftList  = []int{}
+		rightList = []int{}
+	)
+
+	file, err := os.Open(fileName)
+	if err != nil {
+		return leftList, rightList, err
+	}
+	defer file.Close()
+
+	scanner := bufio.NewScanner(file)
+
+	for scanner.Scan() {
+		line := scanner.Text()
+
+		split := strings.Fields(line)
+		first, err := strconv.Atoi(split[0])
+		if err != nil {
+			return leftList, rightList, err
+		}
+
+		second, err := strconv.Atoi(split[1])
+		if err != nil {
+			return leftList, rightList, err
+		}
+
+		leftList = append(leftList, first)
+		rightList = append(rightList, second)
+	}
+
+	if err := scanner.Err(); err != nil {
+		return leftList, rightList, err
+	}
+
+	slices.Sort(leftList)
+	slices.Sort(rightList)
+
+	return leftList, rightList, nil
 }
 
 func abs(x int) int {
