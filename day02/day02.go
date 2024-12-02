@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"slices"
 	"strconv"
 	"strings"
 )
@@ -18,6 +19,33 @@ func Part1() {
 	for i := 0; i < len(reportsList); i++ {
 		if isReportSafe(reportsList[i]) {
 			safeReportsCount += 1
+		}
+	}
+
+	fmt.Println(safeReportsCount)
+}
+
+func Part2() {
+	reportsList, err := getListOfReports("day02/input.txt")
+	if err != nil {
+		fmt.Println("Error:", err)
+	}
+
+	safeReportsCount := 0
+	for i := 0; i < len(reportsList); i++ {
+		currReport := reportsList[i]
+
+		if isReportSafe(currReport) {
+			safeReportsCount += 1
+		} else {
+			for j := 0; j < len(currReport); j++ {
+				reportWithoutJPosition := slices.Delete(slices.Clone(currReport), j, j+1)
+
+				if isReportSafe(reportWithoutJPosition) {
+					safeReportsCount += 1
+					break
+				}
+			}
 		}
 	}
 
