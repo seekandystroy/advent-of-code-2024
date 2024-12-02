@@ -9,10 +9,25 @@ import (
 )
 
 func Part1() {
-	file, err := os.Open("day02/input.txt")
+	reportsList, err := getListOfReports("day02/input.txt")
 	if err != nil {
 		fmt.Println("Error:", err)
-		return
+	}
+
+	var safeReportsCount = 0
+	for i := 0; i < len(reportsList); i++ {
+		if isReportSafe(reportsList[i]) {
+			safeReportsCount += 1
+		}
+	}
+
+	fmt.Println(safeReportsCount)
+}
+
+func getListOfReports(fileName string) ([][]int, error) {
+	file, err := os.Open(fileName)
+	if err != nil {
+		return nil, err
 	}
 	defer file.Close()
 
@@ -24,23 +39,13 @@ func Part1() {
 
 		report, err := lineToNumbersList(line)
 		if err != nil {
-			fmt.Println("Error:", err)
-			return
+			return nil, err
 		}
 
 		reportsList = append(reportsList, report)
 	}
 
-	var safeReportsCount = 0
-	for i := 0; i < len(reportsList); i++ {
-		safe := isReportSafe(reportsList[i])
-
-		if safe {
-			safeReportsCount += 1
-		}
-	}
-
-	fmt.Println(safeReportsCount)
+	return reportsList, nil
 }
 
 func lineToNumbersList(line string) ([]int, error) {
