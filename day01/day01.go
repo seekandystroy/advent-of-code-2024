@@ -24,6 +24,39 @@ func Part1() {
 	fmt.Println(totalDistance)
 }
 
+func Part2() {
+	leftList, rightList, err := getListsFromFile("day01/input.txt")
+	if err != nil {
+		fmt.Println("Error:", err)
+	}
+
+	rightOccurrences := make(map[int]int)
+
+	for i := 0; i < len(rightList); i++ {
+		val := rightList[i]
+		_, exists := rightOccurrences[val]
+
+		if !exists {
+			rightOccurrences[val] = 1
+		} else {
+			rightOccurrences[val] += 1
+		}
+	}
+
+	var similarityScore = 0
+
+	for i := 0; i < len(leftList); i++ {
+		leftValue := leftList[i]
+		occurences, exists := rightOccurrences[leftValue]
+
+		if exists {
+			similarityScore += leftValue * occurences
+		}
+	}
+
+	fmt.Println(similarityScore)
+}
+
 func getListsFromFile(fileName string) ([]int, []int, error) {
 	var (
 		leftList  = []int{}
