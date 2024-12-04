@@ -4,6 +4,7 @@ import (
 	"advent-of-code-2024/day01"
 	"advent-of-code-2024/day02"
 	"advent-of-code-2024/day03"
+	"advent-of-code-2024/day04"
 	"flag"
 	"fmt"
 )
@@ -25,6 +26,8 @@ func main() {
 		day03.Part1()
 	case "0302":
 		day03.Part2()
+	case "0401":
+		day04.Part1()
 	case "":
 		fmt.Println("Please choose a day and part to run, in the format DDPP.")
 	default:
