@@ -42,6 +42,32 @@ func Part1() {
 	fmt.Println(totalXMAS)
 }
 
+func Part2() {
+	var err error
+
+	matrix, err = readMatrix("day04/input.txt")
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	rows = len(matrix)
+	cols = len(matrix[0])
+	totalCrossMAS := 0
+
+	for r := 1; r < rows-1; r++ {
+		for c := 1; c < cols-1; c++ {
+			if matrix[r][c] == 'A' {
+				totalCrossMAS += countCrossMASMAS(r, c)
+				totalCrossMAS += countCrossMASSAM(r, c)
+				totalCrossMAS += countCrossSAMSAM(r, c)
+				totalCrossMAS += countCrossSAMMAS(r, c)
+			}
+		}
+	}
+
+	fmt.Println(totalCrossMAS)
+}
+
 func readMatrix(fileName string) ([][]rune, error) {
 	file, err := os.Open(fileName)
 	if err != nil {
@@ -147,6 +173,62 @@ func countWMatchXMAS(r int, c int) int {
 		matrix[r][c-1] == 'M' &&
 		matrix[r][c-2] == 'A' &&
 		matrix[r][c-3] == 'S' {
+		return 1
+	}
+
+	return 0
+}
+
+// M.S
+// .A.
+// M.S
+func countCrossMASMAS(r int, c int) int {
+	if matrix[r-1][c-1] == 'M' &&
+		matrix[r+1][c-1] == 'M' &&
+		matrix[r-1][c+1] == 'S' &&
+		matrix[r+1][c+1] == 'S' {
+		return 1
+	}
+
+	return 0
+}
+
+// M.M
+// .A.
+// S.S
+func countCrossMASSAM(r int, c int) int {
+	if matrix[r-1][c-1] == 'M' &&
+		matrix[r+1][c-1] == 'S' &&
+		matrix[r-1][c+1] == 'M' &&
+		matrix[r+1][c+1] == 'S' {
+		return 1
+	}
+
+	return 0
+}
+
+// S.M
+// .A.
+// S.M
+func countCrossSAMSAM(r int, c int) int {
+	if matrix[r-1][c-1] == 'S' &&
+		matrix[r+1][c-1] == 'S' &&
+		matrix[r-1][c+1] == 'M' &&
+		matrix[r+1][c+1] == 'M' {
+		return 1
+	}
+
+	return 0
+}
+
+// S.S
+// .A.
+// M.M
+func countCrossSAMMAS(r int, c int) int {
+	if matrix[r-1][c-1] == 'S' &&
+		matrix[r+1][c-1] == 'M' &&
+		matrix[r-1][c+1] == 'S' &&
+		matrix[r+1][c+1] == 'M' {
 		return 1
 	}
 
