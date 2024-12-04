@@ -27,14 +27,14 @@ func Part1() {
 	for r := 0; r < rows; r++ {
 		for c := 0; c < cols; c++ {
 			if matrix[r][c] == 'X' {
-				totalXMAS += countNWMatch(r, c)
-				totalXMAS += countNMatch(r, c)
-				totalXMAS += countNEMatch(r, c)
-				totalXMAS += countEMatch(r, c)
-				totalXMAS += countSEMatch(r, c)
-				totalXMAS += countSMatch(r, c)
-				totalXMAS += countSWMatch(r, c)
-				totalXMAS += countWMatch(r, c)
+				totalXMAS += countNWMatchXMAS(r, c)
+				totalXMAS += countNMatchXMAS(r, c)
+				totalXMAS += countNEMatchXMAS(r, c)
+				totalXMAS += countEMatchXMAS(r, c)
+				totalXMAS += countSEMatchXMAS(r, c)
+				totalXMAS += countSMatchXMAS(r, c)
+				totalXMAS += countSWMatchXMAS(r, c)
+				totalXMAS += countWMatchXMAS(r, c)
 			}
 		}
 	}
@@ -65,7 +65,7 @@ func readMatrix(fileName string) ([][]rune, error) {
 	return matrix, nil
 }
 
-func countNWMatch(r int, c int) int {
+func countNWMatchXMAS(r int, c int) int {
 	if r >= 3 && c >= 3 &&
 		matrix[r-1][c-1] == 'M' &&
 		matrix[r-2][c-2] == 'A' &&
@@ -76,7 +76,7 @@ func countNWMatch(r int, c int) int {
 	return 0
 }
 
-func countNMatch(r int, c int) int {
+func countNMatchXMAS(r int, c int) int {
 	if r >= 3 &&
 		matrix[r-1][c] == 'M' &&
 		matrix[r-2][c] == 'A' &&
@@ -87,7 +87,7 @@ func countNMatch(r int, c int) int {
 	return 0
 }
 
-func countNEMatch(r int, c int) int {
+func countNEMatchXMAS(r int, c int) int {
 	if r >= 3 && c <= cols-4 &&
 		matrix[r-1][c+1] == 'M' &&
 		matrix[r-2][c+2] == 'A' &&
@@ -98,7 +98,7 @@ func countNEMatch(r int, c int) int {
 	return 0
 }
 
-func countEMatch(r int, c int) int {
+func countEMatchXMAS(r int, c int) int {
 	if c <= cols-4 &&
 		matrix[r][c+1] == 'M' &&
 		matrix[r][c+2] == 'A' &&
@@ -109,7 +109,7 @@ func countEMatch(r int, c int) int {
 	return 0
 }
 
-func countSEMatch(r int, c int) int {
+func countSEMatchXMAS(r int, c int) int {
 	if r <= rows-4 && c <= cols-4 &&
 		matrix[r+1][c+1] == 'M' &&
 		matrix[r+2][c+2] == 'A' &&
@@ -120,7 +120,7 @@ func countSEMatch(r int, c int) int {
 	return 0
 }
 
-func countSMatch(r int, c int) int {
+func countSMatchXMAS(r int, c int) int {
 	if r <= rows-4 &&
 		matrix[r+1][c] == 'M' &&
 		matrix[r+2][c] == 'A' &&
@@ -131,7 +131,7 @@ func countSMatch(r int, c int) int {
 	return 0
 }
 
-func countSWMatch(r int, c int) int {
+func countSWMatchXMAS(r int, c int) int {
 	if r <= rows-4 && c >= 3 &&
 		matrix[r+1][c-1] == 'M' &&
 		matrix[r+2][c-2] == 'A' &&
@@ -142,7 +142,7 @@ func countSWMatch(r int, c int) int {
 	return 0
 }
 
-func countWMatch(r int, c int) int {
+func countWMatchXMAS(r int, c int) int {
 	if c >= 3 &&
 		matrix[r][c-1] == 'M' &&
 		matrix[r][c-2] == 'A' &&
