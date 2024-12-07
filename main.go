@@ -43,6 +43,8 @@ func main() {
 		day06.Part2()
 	case "0701":
 		day07.Part1()
+	case "0702":
+		day07.Part2()
 	case "":
 		fmt.Println("Please choose a day and part to run, in the format DDPP.")
 	default:
