@@ -12,6 +12,12 @@ func Part1() {
 	fmt.Println(calculateAntinodes(matrix, antennas))
 }
 
+func Part2() {
+	matrix, antennas := readMatrix("day08/input.txt")
+
+	fmt.Println(calculateAntinodesWithHarmonics(matrix, antennas))
+}
+
 func readMatrix(fileName string) ([][]rune, map[rune][][]int) {
 	file, err := os.Open(fileName)
 	if err != nil {
@@ -69,6 +75,19 @@ func calculateAntinodes(matrix [][]rune, antennas map[rune][][]int) int {
 
 	return antinodesTotal
 }
+func calculateAntinodesWithHarmonics(matrix [][]rune, antennas map[rune][][]int) int {
+	antinodesTotal := 0
+	for _, v := range antennas {
+		for idx, pos := range v {
+			for i := idx + 1; i < len(v); i++ {
+				antinodesTotal += antinodeHarmonics(pos, v[i], matrix)
+				antinodesTotal += antinodeHarmonics(v[i], pos, matrix)
+			}
+		}
+	}
+
+	return antinodesTotal
+}
 
 func antinode(pos1 []int, pos2 []int) (int, int) {
 	r1 := pos1[0]
@@ -80,4 +99,33 @@ func antinode(pos1 []int, pos2 []int) (int, int) {
 	col := c1 - c2 + c1
 
 	return row, col
+}
+func antinodeHarmonics(pos1 []int, pos2 []int, matrix [][]rune) int {
+	maxRows := len(matrix)
+	maxCols := len(matrix[0])
+	r1 := pos1[0]
+	c1 := pos1[1]
+	r2 := pos2[0]
+	c2 := pos2[1]
+
+	row := r1 - r2 + r1
+	col := c1 - c2 + c1
+
+	total := 0
+
+	if row >= 0 && row < maxRows && col >= 0 && col < maxCols {
+		if matrix[row][col] != '#' {
+			matrix[row][col] = '#'
+			total++
+		}
+
+		total += antinodeHarmonics([]int{row, col}, pos1, matrix)
+	}
+
+	if matrix[r1][c1] != '#' {
+		matrix[r1][c1] = '#'
+		total++
+	}
+
+	return total
 }
