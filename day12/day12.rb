@@ -130,42 +130,50 @@ module Day12
     sides += 1 if matrix[row - 1][col] != symbol
 
     # remove top side
-    if matrix[row - 1][col] != symbol && ((matrix[row][col - 1] == symbol && visited[row][col - 1] && matrix[row - 1][col - 1] != symbol) ||
+    if matrix[row - 1][col] != symbol &&
+       ((matrix[row][col - 1] == symbol && visited[row][col - 1] && matrix[row - 1][col - 1] != symbol) ||
        (matrix[row][col + 1] == symbol && visited[row][col + 1] && matrix[row - 1][col + 1] != symbol))
       sides -= 1
     end
     # remove bottom side
-    if matrix[row + 1][col] != symbol && ((matrix[row][col - 1] == symbol && visited[row][col - 1] && matrix[row + 1][col - 1] != symbol) ||
-       (matrix[row][col + 1] == symbol && visited[row][col + 1] && matrix[row + 1][col + 1] != symbol))
+    if matrix[row + 1][col] != symbol &&
+       ((matrix[row][col - 1] == symbol && visited[row][col - 1] && matrix[row + 1][col - 1] != symbol) ||
+        (matrix[row][col + 1] == symbol && visited[row][col + 1] && matrix[row + 1][col + 1] != symbol))
       sides -= 1
     end
     # remove left side
-    if matrix[row][col - 1] != symbol && ((matrix[row - 1][col] == symbol && visited[row - 1][col] && matrix[row - 1][col - 1] != symbol) ||
-       (matrix[row + 1][col] == symbol && visited[row + 1][col] && matrix[row + 1][col - 1] != symbol))
+    if matrix[row][col - 1] != symbol &&
+       ((matrix[row - 1][col] == symbol && visited[row - 1][col] && matrix[row - 1][col - 1] != symbol) ||
+        (matrix[row + 1][col] == symbol && visited[row + 1][col] && matrix[row + 1][col - 1] != symbol))
       sides -= 1
     end
     # remove right side
-    if matrix[row][col + 1] != symbol && ((matrix[row - 1][col] == symbol && visited[row - 1][col] && matrix[row - 1][col + 1] != symbol) ||
-       (matrix[row + 1][col] == symbol && visited[row + 1][col] && matrix[row + 1][col + 1] != symbol))
+    if matrix[row][col + 1] != symbol &&
+       ((matrix[row - 1][col] == symbol && visited[row - 1][col] && matrix[row - 1][col + 1] != symbol) ||
+        (matrix[row + 1][col] == symbol && visited[row + 1][col] && matrix[row + 1][col + 1] != symbol))
       sides -= 1
     end
 
     # at the end of traversing a straight line, we'll have an extra side due to starting that side from the opposite direction
     # when that line meets the initial point, we remove that extra side
-    if matrix[row - 1][col] != symbol && ((matrix[row][col - 1] == symbol && visited[row][col - 1] && matrix[row - 1][col - 1] != symbol) &&
-       (matrix[row][col + 1] == symbol && visited[row][col + 1] && matrix[row - 1][col + 1] != symbol))
+    if matrix[row - 1][col] != symbol &&
+       ((matrix[row][col - 1] == symbol && visited[row][col - 1] && matrix[row - 1][col - 1] != symbol) &&
+        (matrix[row][col + 1] == symbol && visited[row][col + 1] && matrix[row - 1][col + 1] != symbol))
       sides -= 1
     end
-    if matrix[row + 1][col] != symbol && ((matrix[row][col - 1] == symbol && visited[row][col - 1] && matrix[row + 1][col - 1] != symbol) &&
-       (matrix[row][col + 1] == symbol && visited[row][col + 1] && matrix[row + 1][col + 1] != symbol))
+    if matrix[row + 1][col] != symbol &&
+       ((matrix[row][col - 1] == symbol && visited[row][col - 1] && matrix[row + 1][col - 1] != symbol) &&
+        (matrix[row][col + 1] == symbol && visited[row][col + 1] && matrix[row + 1][col + 1] != symbol))
       sides -= 1
     end
-    if matrix[row][col - 1] != symbol && ((matrix[row - 1][col] == symbol && visited[row - 1][col] && matrix[row - 1][col - 1] != symbol) &&
-       (matrix[row + 1][col] == symbol && visited[row + 1][col] && matrix[row + 1][col - 1] != symbol))
+    if matrix[row][col - 1] != symbol &&
+       ((matrix[row - 1][col] == symbol && visited[row - 1][col] && matrix[row - 1][col - 1] != symbol) &&
+        (matrix[row + 1][col] == symbol && visited[row + 1][col] && matrix[row + 1][col - 1] != symbol))
       sides -= 1
     end
-    if matrix[row][col + 1] != symbol && ((matrix[row - 1][col] == symbol && visited[row - 1][col] && matrix[row - 1][col + 1] != symbol) &&
-       (matrix[row + 1][col] == symbol && visited[row + 1][col] && matrix[row + 1][col + 1] != symbol))
+    if matrix[row][col + 1] != symbol &&
+       ((matrix[row - 1][col] == symbol && visited[row - 1][col] && matrix[row - 1][col + 1] != symbol) &&
+        (matrix[row + 1][col] == symbol && visited[row + 1][col] && matrix[row + 1][col + 1] != symbol))
       sides -= 1
     end
 
