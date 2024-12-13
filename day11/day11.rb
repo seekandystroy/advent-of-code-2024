@@ -13,7 +13,6 @@ module Day11
   def self.part2
     nums = File.new('day11/input.txt').readline(chomp: true).split(' ').map(&:to_i).sort
 
-    puts nums.inspect
     cache = {}
     sum = nums.map { |num| blink_with_cache(num, cache, 1) }.sum
 
@@ -22,6 +21,25 @@ module Day11
 
   def self.blink(nums)
     nums.flat_map { |num| individual_blink(num) }
+  end
+
+  def self.blink_with_cache(num, cache, blink_num, path = Set.new)
+    total_blinks = 75
+    return cache[num][total_blinks - blink_num] if cache.dig(num, total_blinks - blink_num)
+
+    children = individual_blink(num)
+    sum = if blink_num < total_blinks
+            children.map do |child|
+              blink_with_cache(child, cache, blink_num + 1, path.add(num))
+            end.sum
+          else
+            individual_blink(num).length
+          end
+
+    cache[num] = cache[num] || {}
+    cache[num][total_blinks - blink_num] = sum
+
+    sum
   end
 
   def self.individual_blink(num)
@@ -46,26 +64,8 @@ module Day11
     num_digits(num).even?
   end
 
-  def self.blink_with_cache(num, cache, blink_num, path = Set.new)
-    total_blinks = 75
-    return cache[num][total_blinks - blink_num] if cache.dig(num, total_blinks - blink_num)
-
-    children = individual_blink(num)
-    sum = if blink_num < total_blinks
-            children.map do |child|
-              blink_with_cache(child, cache, blink_num + 1, path.add(num))
-            end.sum
-          else
-            individual_blink(num).length
-          end
-
-    cache[num] = cache[num] || {}
-    cache[num][total_blinks - blink_num] = sum
-
-    sum
-  end
-
   private_class_method(:blink)
+  private_class_method(:blink_with_cache)
   private_class_method(:individual_blink)
   private_class_method(:num_digits)
   private_class_method(:even_digits?)
