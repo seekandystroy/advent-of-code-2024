@@ -36,8 +36,6 @@ module Day12
     sum = 0
 
     while row < matrix.length - 1
-      @starter_row = row
-      @starter_col = col
       sides, area, new_row, new_col = traverse_for_sides(matrix, row, col, 0, 0, visited)
 
       # puts("Area * Sides: #{area} * #{sides}, #{matrix[row][col]}")
