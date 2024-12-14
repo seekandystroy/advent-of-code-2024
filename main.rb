@@ -23,6 +23,8 @@ when '1301'
   Day13.part1
 when '1401'
   Day14.part1
+when '1402'
+  Day14.part2
 else
   puts('Please choose a day and part to run, in the format DDPP.')
 end
