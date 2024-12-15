@@ -5,15 +5,21 @@ module Day13
   def self.part1
     file = File.new('day13/input.txt')
 
-    sum = 0
+    ractors = []
     until file.eof?
-      prize_x, prize_y, a_x, a_y, b_x, b_y = read_prize_lines(file)
-      a_presses, b_presses = amount_of_presses(prize_x, prize_y, a_x, a_y, b_x, b_y)
+      ractors << Ractor.new(read_prize_lines(file)) do |vars|
+        puts "Ractor start for #{vars.inspect}"
+        start_time = Time.now
+        prize_x, prize_y, a_x, a_y, b_x, b_y = vars
+        a_presses, b_presses = Day13.amount_of_presses(prize_x, prize_y, a_x, a_y, b_x, b_y)
 
-      sum += a_presses * 3 + b_presses
+        elapsed_time = Time.now - start_time
+        puts "Ractor end for #{vars.inspect}. Got to #{a_presses}, #{b_presses}, in #{elapsed_time}"
+        a_presses * 3 + b_presses
+      end
     end
 
-    puts sum
+    puts ractors.map(&:take).sum
   end
 
   def self.read_prize_lines(file)
@@ -29,8 +35,8 @@ module Day13
 
     prize = file.readline(chomp: true)
     prize_matches = prize.match(/Prize: X=(\d+), Y=(\d+)/)
-    prize_x = prize_matches[1].to_i
-    prize_y = prize_matches[2].to_i
+    prize_x = prize_matches[1].to_i + 10_000_000_000_000
+    prize_y = prize_matches[2].to_i + 10_000_000_000_000
 
     file.readline unless file.eof?
 
@@ -38,7 +44,7 @@ module Day13
   end
 
   def self.amount_of_presses(prize_x, prize_y, a_x, a_y, b_x, b_y)
-    (0..100).each do |a_presses|
+    (0..100_000_000_000).each do |a_presses|
       break if a_presses * a_x > prize_x || a_presses * a_y > prize_y
 
       b_presses = (prize_x - a_presses * a_x) / b_x
@@ -51,5 +57,4 @@ module Day13
   end
 
   private_class_method(:read_prize_lines)
-  private_class_method(:amount_of_presses)
 end
