@@ -10,7 +10,24 @@ module Day13
       prize_x, prize_y, a_x, a_y, b_x, b_y = read_prize_lines(file)
       a_presses, b_presses = amount_of_presses(prize_x, prize_y, a_x, a_y, b_x, b_y)
 
-      sum += a_presses * 3 + b_presses
+      sum += (a_presses * 3) + b_presses
+    end
+
+    puts sum
+  end
+
+  def self.part2
+    file = File.new('day13/input.txt')
+
+    sum = 0
+    until file.eof?
+      prize_x, prize_y, a_x, a_y, b_x, b_y = read_prize_lines(file)
+      a_presses, b_presses = amount_of_presses_by_equation(prize_x + 10_000_000_000_000,
+                                                           prize_y + 10_000_000_000_000,
+                                                           a_x, a_y,
+                                                           b_x, b_y)
+
+      sum += (a_presses * 3) + b_presses
     end
 
     puts sum
@@ -41,8 +58,8 @@ module Day13
     (0..100).each do |a_presses|
       break if a_presses * a_x > prize_x || a_presses * a_y > prize_y
 
-      b_presses = (prize_x - a_presses * a_x) / b_x
-      if a_presses * a_x + b_presses * b_x == prize_x && a_presses * a_y + b_presses * b_y == prize_y
+      b_presses = (prize_x - (a_presses * a_x)) / b_x
+      if (a_presses * a_x) + (b_presses * b_x) == prize_x && (a_presses * a_y) + (b_presses * b_y) == prize_y
         return [a_presses, b_presses]
       end
     end
@@ -50,6 +67,23 @@ module Day13
     [0, 0]
   end
 
+  def self.amount_of_presses_by_equation(prize_x, prize_y, a_x, a_y, b_x, b_y)
+    # substitution method to derive the equation from the system doesn't work
+    # because of integer division in intermediate steps
+    # b_presses = (- prize_x + (prize_y / a_y * a_x)) / ((b_y / a_y * a_x) - b_x)
+
+    # elimination method yields only one division
+    b_presses = ((prize_x * a_y) - (prize_y * a_x)) / ((b_x * a_y) - (b_y * a_x))
+    a_presses = (prize_x - (b_presses * b_x)) / a_x
+
+    if (a_presses * a_x) + (b_presses * b_x) == prize_x && (a_presses * a_y) + (b_presses * b_y) == prize_y
+      [a_presses, b_presses]
+    else
+      [0, 0]
+    end
+  end
+
   private_class_method(:read_prize_lines)
   private_class_method(:amount_of_presses)
+  private_class_method(:amount_of_presses_by_equation)
 end

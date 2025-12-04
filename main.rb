@@ -21,6 +21,8 @@ when '1202'
   Day12.part2
 when '1301'
   Day13.part1
+when '1302'
+  Day13.part2
 when '1401'
   Day14.part1
 when '1402'
