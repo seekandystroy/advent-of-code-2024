@@ -20,8 +20,8 @@ module Day14
       vx = matches[3].to_i
       vy = matches[4].to_i
 
-      x_after_100_seconds = (x + 100 * vx) % @cols
-      y_after_100_seconds = (y + 100 * vy) % @rows
+      x_after_100_seconds = (x + (100 * vx)) % @cols
+      y_after_100_seconds = (y + (100 * vy)) % @rows
 
       robots_quadrant1 += 1 if x_after_100_seconds < @cols / 2 && y_after_100_seconds < @rows / 2
       robots_quadrant2 += 1 if x_after_100_seconds < @cols / 2 && y_after_100_seconds > @rows / 2
@@ -29,7 +29,7 @@ module Day14
       robots_quadrant4 += 1 if x_after_100_seconds > @cols / 2 && y_after_100_seconds > @rows / 2
     end
 
-    puts robots_quadrant1 * robots_quadrant2 * robots_quadrant3 * robots_quadrant4
+    robots_quadrant1 * robots_quadrant2 * robots_quadrant3 * robots_quadrant4
   end
 
   def self.part2
@@ -54,8 +54,8 @@ module Day14
           vx = robot[2]
           vy = robot[3]
 
-          x_after_i_seconds = (x + i * vx) % @cols
-          y_after_i_seconds = (y + i * vy) % @rows
+          x_after_i_seconds = (x + (i * vx)) % @cols
+          y_after_i_seconds = (y + (i * vy)) % @rows
 
           matrix[y_after_i_seconds, x_after_i_seconds] += 1
         end

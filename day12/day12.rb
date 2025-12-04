@@ -22,7 +22,7 @@ module Day12
       col = new_col
     end
 
-    puts sum
+    sum
   end
 
   def self.part2
@@ -45,7 +45,7 @@ module Day12
       col = new_col
     end
 
-    puts sum
+    sum
   end
 
   def self.traverse_for_perimeter(matrix, row, col, perimeter, area, visited)

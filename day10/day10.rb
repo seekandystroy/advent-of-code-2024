@@ -13,7 +13,7 @@ module Day10
       end
     end
 
-    puts trailhead_score_sum
+    trailhead_score_sum
   end
 
   def self.part2
@@ -27,7 +27,7 @@ module Day10
       end
     end
 
-    puts trailhead_score_sum
+    trailhead_score_sum
   end
 
   def self.trailhead_score(matrix, row, col)

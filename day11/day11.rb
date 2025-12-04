@@ -7,16 +7,14 @@ module Day11
 
     25.times { nums = blink(nums) }
 
-    puts(nums.length)
+    nums.length
   end
 
   def self.part2
     nums = File.new('day11/input.txt').readline(chomp: true).split(' ').map(&:to_i).sort
 
     cache = {}
-    sum = nums.map { |num| blink_with_cache(num, cache, 1) }.sum
-
-    puts(sum)
+    nums.map { |num| blink_with_cache(num, cache, 1) }.sum
   end
 
   def self.blink(nums)
@@ -48,7 +46,7 @@ module Day11
     elsif even_digits?(num)
       half_zeroes = 10.pow(num_digits(num) / 2)
       first_half = num / half_zeroes
-      second_half = num - first_half * half_zeroes
+      second_half = num - (first_half * half_zeroes)
 
       [first_half, second_half]
     else

@@ -13,7 +13,7 @@ module Day13
       sum += (a_presses * 3) + b_presses
     end
 
-    puts sum
+    sum
   end
 
   def self.part2
@@ -30,7 +30,7 @@ module Day13
       sum += (a_presses * 3) + b_presses
     end
 
-    puts sum
+    sum
   end
 
   def self.read_prize_lines(file)
