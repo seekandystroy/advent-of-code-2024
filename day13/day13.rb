@@ -54,7 +54,7 @@ module Day13
     [prize_x, prize_y, a_x, a_y, b_x, b_y]
   end
 
-  def self.amount_of_presses(prize_x, prize_y, a_x, a_y, b_x, b_y)
+  def self.amount_of_presses(prize_x, prize_y, a_x, a_y, b_x, b_y) # rubocop:disable Metrics/ParameterLists
     (0..100).each do |a_presses|
       break if a_presses * a_x > prize_x || a_presses * a_y > prize_y
 
@@ -67,7 +67,7 @@ module Day13
     [0, 0]
   end
 
-  def self.amount_of_presses_by_equation(prize_x, prize_y, a_x, a_y, b_x, b_y)
+  def self.amount_of_presses_by_equation(prize_x, prize_y, a_x, a_y, b_x, b_y) # rubocop:disable Metrics/ParameterLists
     # substitution method to derive the equation from the system doesn't work
     # because of integer division in intermediate steps
     # b_presses = (- prize_x + (prize_y / a_y * a_x)) / ((b_y / a_y * a_x) - b_x)

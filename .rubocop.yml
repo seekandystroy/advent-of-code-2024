@@ -1,0 +1,17 @@
+AllCops:
+  NewCops: enable
+
+Metrics/MethodLength:
+  Max: 20
+
+Naming/MethodParameterName:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/NumericPredicate:
+  Enabled: false
+
+Metrics/AbcSize:
+  Enabled: false
