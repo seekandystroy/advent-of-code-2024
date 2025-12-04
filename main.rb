@@ -13,7 +13,7 @@ puts case ARGV[0]
        Day10.part2
      when '1101'
        Day11.part1
-     when '1102' # not working
+     when '1102'
        Day11.part2
      when '1201'
        Day12.part1

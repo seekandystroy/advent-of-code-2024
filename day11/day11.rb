@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-# Day 11
 module Day11
   def self.part1
     nums = File.new('day11/input.txt').readline(chomp: true).split(' ').map(&:to_i)

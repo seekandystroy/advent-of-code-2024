@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-# Day 10
 module Day10
   def self.part1
     matrix = File.foreach('day10/input.txt').map { |line| line.strip.chars.map(&:to_i) }

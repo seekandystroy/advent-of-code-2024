@@ -2,7 +2,6 @@
 
 require 'matrix'
 
-# Day 14
 module Day14
   @rows = 103
   @cols = 101

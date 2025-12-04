@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-# Day 13
 module Day13
   def self.part1
     file = File.new('day13/input.txt')
